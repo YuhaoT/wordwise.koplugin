@@ -30,8 +30,10 @@ local function shorten(def)
     return def
 end
 
--- Generate only plausible English base forms, with spelling-change rules before
--- the generic suffix rules. In particular, married/studied must become marry/study, never marri/studi (which may be unrelated dictionary headwords).
+-- Kindle stores headwords rather than every inflected spelling. Generate only
+-- plausible English base forms, with spelling-change rules before the generic
+-- suffix rules. In particular, married/studied must become marry/study, never
+-- marri/studi (which may be unrelated dictionary headwords).
 local function candidates(w)
     local out = { w }
     local seen = { [w] = true }
@@ -121,6 +123,8 @@ function WordWiseDB:_query(key)
     return result
 end
 
+-- Return { gloss = <string>, difficulty = <int> } or nil. Exact Kindle
+-- headwords win; inflected spellings may fall back to a plausible headword.
 function WordWiseDB:lookup(word)
     local key = word:lower()
     local cached = self.cache[key]

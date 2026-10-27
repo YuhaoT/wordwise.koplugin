@@ -137,6 +137,9 @@ function WordWiseDB:lookup(word)
     return result
 end
 
+
+-- Return { gloss = <string>, difficulty = <int> } or nil. Cached per surface
+-- word (including negative results). Tries the word, then de-inflected forms.
 function WordWiseDB:close()
     if self.stmt then pcall(function() self.stmt:close() end) end
     if self.conn then pcall(function() self.conn:close() end) end

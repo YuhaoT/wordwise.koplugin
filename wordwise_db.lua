@@ -30,9 +30,9 @@ local function shorten(def)
     return def
 end
 
--- Generate only plausible English base forms, with spelling-change rules before the
--- generic suffix rules. In particular, married/studied must become marry/study, never
--- marri/studi (which may be unrelated dictionary headwords).
+-- Generate only plausible English lemma (base form), with spelling-change rules before
+-- the generic suffix rules. In particular, married/studied must become marry/study,
+-- never marri/studi (which may be unrelated dictionary lemma).
 local function candidates(w)
     local out = { w }
     local seen = { [w] = true }
